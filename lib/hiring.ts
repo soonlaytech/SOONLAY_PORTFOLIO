@@ -14,20 +14,6 @@ export function isExternalUrl(url: string) {
   return /^https?:\/\//.test(url)
 }
 
-/** The ten Developer DNA dimensions, labelled as in EngineerDNA's dna-scorer. */
-export const DNA_DIMENSIONS = [
-  "Backend Engineering",
-  "Frontend Engineering",
-  "Cloud Knowledge",
-  "DevOps Readiness",
-  "AI / ML Experience",
-  "Database Skills",
-  "API Design Skills",
-  "Security Awareness",
-  "Testing Practices",
-  "System Design Maturity"
-] as const
-
 /** Candidate Ranking Engine factors and weights (apps/api/src/recruiter/ranking.service.ts). */
 export const RANKING_FACTORS = [
   { label: "Skill match", weight: 0.3 },

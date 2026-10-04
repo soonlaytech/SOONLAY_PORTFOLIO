@@ -1,105 +1,15 @@
 import Link from "next/link"
-import { ArrowDown, ChevronRight, GitBranch, Lock, Workflow } from "lucide-react"
+import { ArrowDown, GitBranch, Lock, Workflow } from "lucide-react"
 import { AnimatedWords } from "@/components/ui/AnimatedWords"
-import { DnaRadar } from "@/components/hiring/DnaRadar"
-import { MonoTag, PreviewFrame, ProductMark, TryMcpLink } from "@/components/hiring/primitives"
-import { DNA_DIMENSIONS, HIRING_PRODUCT_NAME } from "@/lib/hiring"
-import { cn } from "@/lib/utils"
-
-const SAMPLE_DNA = [82, 66, 48, 71, 34, 78, 80, 57, 63, 55]
-
-const sampleEvidence = [
-  { tech: "PostgreSQL", strength: "USED", detail: "3 repos · conf 0.94" },
-  { tech: "Docker", strength: "USED", detail: "2 repos · conf 0.88" },
-  { tech: "Jest", strength: "USED", detail: "2 repos · conf 0.81" },
-  { tech: "Kubernetes", strength: "MENTIONED", detail: "README only" }
-] as const
+import { HeroTalentPanel } from "@/components/hiring/HeroTalentPanel"
+import { ProductMark, TryMcpLink } from "@/components/hiring/primitives"
+import { HIRING_PRODUCT_NAME } from "@/lib/hiring"
 
 const facts = [
   { icon: Workflow, label: "10 engineering dimensions" },
   { icon: GitBranch, label: "Deterministic evidence" },
   { icon: Lock, label: "Public repos only" }
 ]
-
-function ProfilePreview() {
-  return (
-    <div className="relative">
-      <PreviewFrame path="/u/sample-dev" className="hero-fade relative" note="Illustrative preview · sample data">
-        <div className="grid gap-5 p-5 sm:grid-cols-[1fr_1.05fr] sm:p-6">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-2 font-mono text-xs text-secondary ring-1 ring-white/10">
-                SD
-              </span>
-              <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-primary">Sample Developer</p>
-                <p className="truncate font-mono text-[11px] text-muted">@sample-dev</p>
-              </div>
-            </div>
-            <div className="mt-5 flex items-end gap-3">
-              <p className="font-display text-5xl font-medium leading-none tracking-[-0.03em] text-primary">78</p>
-              <div className="pb-1">
-                <MonoTag className="block text-accent-2">Strong</MonoTag>
-                <MonoTag className="block">Developer DNA</MonoTag>
-              </div>
-            </div>
-            <DnaRadar values={SAMPLE_DNA} className="mx-auto mt-3 w-full max-w-[220px]" />
-          </div>
-
-          <div className="flex flex-col">
-            <MonoTag>Evidence · per repository</MonoTag>
-            <ul className="mt-3 space-y-2">
-              {sampleEvidence.map((row, i) => (
-                <li
-                  key={row.tech}
-                  className="sv-bubble flex items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2.5 ring-1 ring-white/[0.05]"
-                  style={{ animationDelay: `${0.7 + i * 0.12}s` }}
-                >
-                  <span className="min-w-0">
-                    <span className="block truncate text-[13px] font-medium text-primary">{row.tech}</span>
-                    <span className="block font-mono text-[10.5px] text-muted">{row.detail}</span>
-                  </span>
-                  <span
-                    className={cn(
-                      "flex-shrink-0 rounded-md px-2 py-0.5 font-mono text-[10px] tracking-wider",
-                      row.strength === "USED" ? "bg-accent-2/15 text-accent-2" : "bg-coral/15 text-[#ff9a82]"
-                    )}
-                  >
-                    {row.strength}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-auto pt-4">
-              <MonoTag>Top dimensions</MonoTag>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {[DNA_DIMENSIONS[0], DNA_DIMENSIONS[6], DNA_DIMENSIONS[5]].map((dim) => (
-                  <span key={dim} className="rounded-full bg-white/[0.05] px-2.5 py-1 text-[11px] text-secondary ring-1 ring-white/[0.06]">
-                    {dim}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </PreviewFrame>
-
-      <div
-        className="hero-fade glass absolute -bottom-6 -left-3 hidden w-60 rounded-2xl p-4 sm:block lg:-left-10"
-        style={{ animationDelay: "1.3s" }}
-      >
-        <MonoTag>Claimed skill</MonoTag>
-        <p className="mt-1 text-sm font-semibold text-primary">Kubernetes</p>
-        <div className="mt-3 flex items-center gap-2 font-mono text-[10.5px] tracking-wider">
-          <span className="text-muted">CLAIMED</span>
-          <ChevronRight className="h-3 w-3 text-muted" />
-          <span className="rounded bg-coral/15 px-1.5 py-0.5 text-[#ff9a82]">NOT VERIFIED</span>
-        </div>
-        <p className="mt-2 text-[11.5px] leading-snug text-secondary">Mentioned in a README, never implemented in code.</p>
-      </div>
-    </div>
-  )
-}
 
 export function HiringHero() {
   return (
@@ -163,8 +73,8 @@ export function HiringHero() {
             </ul>
           </div>
 
-          <div className="lg:pl-6" style={{ animationDelay: "300ms" }}>
-            <ProfilePreview />
+          <div className="min-w-0 lg:pl-6">
+            <HeroTalentPanel />
           </div>
         </div>
       </div>
