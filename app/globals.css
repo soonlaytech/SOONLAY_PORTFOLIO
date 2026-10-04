@@ -470,3 +470,150 @@ a:focus-visible .link-underline::after {
 @media (prefers-reduced-motion: reduce) {
   .film-ring::after { animation: none; opacity: 0; }
 }
+
+/* Hiring product (EngineerDNA): a faint ledger grid gives the product its own surface. */
+.hiring-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+}
+
+.dna-shape {
+  transform-origin: 50% 50%;
+  animation: dna-grow 1.4s var(--ease-out-expo) 0.45s both;
+}
+
+.dna-node {
+  animation: hero-fade 0.6s var(--ease-out-expo) both;
+}
+
+@keyframes dna-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bar-grow {
+  transform-origin: left;
+  animation: bar-grow 1.1s var(--ease-out-expo) both;
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.ring-draw {
+  animation: ring-draw 1.2s var(--ease-out-expo) both;
+}
+
+@keyframes ring-draw {
+  from {
+    stroke-dashoffset: var(--ring-from);
+  }
+}
+
+/* Evidence scanner: a slow sweep over the sample file list. */
+.evidence-scan {
+  animation: evidence-scan 4.5s ease-in-out infinite;
+}
+
+@keyframes evidence-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(520%);
+    opacity: 0;
+  }
+}
+
+/* Navbar product entry: a live dot that marks Hiring as a product, not a page. */
+.product-dot {
+  position: relative;
+}
+
+.product-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 1px solid rgba(159, 230, 205, 0.6);
+  animation: film-ring 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dna-shape,
+  .dna-node,
+  .bar-grow,
+  .ring-draw,
+  .evidence-scan,
+  .product-dot::after {
+    animation: none;
+  }
+  .evidence-scan {
+    opacity: 0;
+  }
+}
+
+/* Hiring flow diagrams: nodes rise in and connectors draw once the diagram is revealed. */
+.flow-edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+[data-js] [data-reveal]:not(.is-revealed) .flow-node {
+  opacity: 0;
+}
+
+[data-js] [data-reveal]:not(.is-revealed) .flow-edge {
+  stroke-dashoffset: 1;
+}
+
+.is-revealed .flow-node {
+  animation: hero-fade 0.8s var(--ease-out-expo) both;
+}
+
+.is-revealed .flow-edge {
+  animation: flow-edge-draw 1.1s var(--ease-out-expo) both;
+}
+
+@keyframes flow-edge-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-revealed .flow-node,
+  .is-revealed .flow-edge {
+    animation: none;
+  }
+  [data-js] [data-reveal]:not(.is-revealed) .flow-node {
+    opacity: 1;
+  }
+  [data-js] [data-reveal]:not(.is-revealed) .flow-edge {
+    stroke-dashoffset: 0;
+  }
+  .flow-dot {
+    display: none;
+  }
+}

@@ -4,8 +4,12 @@ import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
+import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { HIRING_PAGE_PATH } from "@/lib/hiring"
+import { trackHiring } from "@/lib/hiring-analytics"
 import { useContactModal } from "@/components/layout/ContactModalContext"
+import { ProductMark } from "@/components/hiring/primitives"
 
 interface MobileMenuProps {
   open: boolean
@@ -61,6 +65,27 @@ export function MobileMenu({ open, setOpen, links }: MobileMenuProps) {
                 </Link>
               )
             })}
+            <Link
+              href={HIRING_PAGE_PATH}
+              onClick={() => {
+                setOpen(false)
+                trackHiring("hiring_nav_click", { location: "mobile-menu" })
+              }}
+              aria-current={pathname === HIRING_PAGE_PATH ? "page" : undefined}
+              className="mt-2 flex items-center gap-3 rounded-2xl bg-ink/70 p-3 ring-1 ring-accent-2/30 transition-colors hover:bg-ink"
+            >
+              <ProductMark className="h-9 w-9" />
+              <span className="min-w-0 flex-1">
+                <span className="flex items-center gap-2 text-sm font-semibold text-primary">
+                  Hiring
+                  <span className="rounded bg-accent-2/15 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-accent-2">
+                    Product
+                  </span>
+                </span>
+                <span className="block truncate text-xs text-muted">EngineerDNA by Soonlay</span>
+              </span>
+              <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-accent-2" />
+            </Link>
             <button
               type="button"
               onClick={() => {

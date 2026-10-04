@@ -11,6 +11,8 @@ const company = [
   { href: "/contact", label: "Contact" }
 ]
 
+const products = [{ href: "/hiring", label: "Hiring · EngineerDNA" }]
+
 const resources = [
   { href: "/guides", label: "Guides" },
   { href: "/guides/app-development-cost-india", label: "App development cost" },
@@ -47,7 +49,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border glass">
       <div className="mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_0.9fr_1fr_1.1fr_1fr]">
           <div className="max-w-sm">
             <Logo />
             <p className="mt-5 text-sm leading-relaxed text-secondary">
@@ -78,6 +80,7 @@ export function Footer() {
             </div>
           </div>
           <Column title="Company" links={company} />
+          <Column title="Products" links={products} />
           <Column title="Services" links={serviceLinks.map((s) => ({ href: s.href, label: s.title }))} />
           <Column title="Resources" links={resources} />
         </div>
