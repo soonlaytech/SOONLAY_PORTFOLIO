@@ -3,9 +3,12 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react"
+import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { serviceLinks } from "@/lib/services"
+import { HIRING_PAGE_PATH } from "@/lib/hiring"
+import { trackHiring } from "@/lib/hiring-analytics"
+import { ProductMark } from "@/components/hiring/primitives"
 import { Logo } from "@/components/ui/Logo"
 import { MobileMenu } from "@/components/layout/MobileMenu"
 import { useContactModal } from "@/components/layout/ContactModalContext"
@@ -108,9 +111,28 @@ export function Navbar() {
           </button>
         </nav>
 
-        <p className="hidden w-[150px] text-right text-[13px] text-secondary lg:block">
-          <span className="hidden xl:inline">Software, built with care.</span>
-        </p>
+        <Link
+          href={HIRING_PAGE_PATH}
+          onClick={() => trackHiring("hiring_nav_click", { location: "navbar" })}
+          aria-current={isActivePath(pathname, HIRING_PAGE_PATH) ? "page" : undefined}
+          aria-label="Hiring: EngineerDNA, a product by Soonlay"
+          className={cn(
+            "group hidden items-center gap-2.5 rounded-full bg-ink/70 py-1.5 pl-1.5 pr-3 ring-1 backdrop-blur-xl transition-[box-shadow,background-color] duration-500 [transition-timing-function:var(--ease-spring)] hover:bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-2 lg:inline-flex",
+            isActivePath(pathname, HIRING_PAGE_PATH)
+              ? "ring-accent-2/60 shadow-[0_0_24px_-6px_rgba(159,230,205,0.45)]"
+              : "ring-accent-2/25 hover:ring-accent-2/55"
+          )}
+        >
+          <span className="relative">
+            <ProductMark />
+            <span aria-hidden className="product-dot absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent-2 ring-2 ring-ink" />
+          </span>
+          <span className="flex flex-col leading-none">
+            <span className="text-[13.5px] font-semibold text-primary">Hiring</span>
+            <span className="mt-[3px] font-mono text-[8.5px] uppercase tracking-[0.18em] text-accent-2/80">Product</span>
+          </span>
+          <ArrowUpRight className="h-3.5 w-3.5 text-secondary transition-transform duration-500 [transition-timing-function:var(--ease-spring)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-2" />
+        </Link>
 
         <button
           className="glass inline-flex h-10 w-10 items-center justify-center rounded-full text-primary lg:hidden"

@@ -13,6 +13,7 @@ const staticRoutes: { path: string; priority: number; changeFrequency: "weekly" 
   { path: "/services/mvp-development", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services/custom-systems", priority: 0.8, changeFrequency: "monthly" },
   { path: "/work", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/hiring", priority: 0.8, changeFrequency: "monthly" },
   { path: "/guides", priority: 0.7, changeFrequency: "weekly" },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
